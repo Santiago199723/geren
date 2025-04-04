@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão LONDEX</title>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('fundo.png') no-repeat center center fixed; /* Substitua 'sua-imagem.jpg' */
+            background-size: cover;
+        }
+
+        button {
+            background: linear-gradient(45deg, #4f1483, #9d4edd);
+            border: none;
+            position: center;;
+            padding: 13px 28px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(157, 78, 221, 0.5);
+        }
+
+        button:active {
+            transform: scale(1);
+        }
+
+
+        .container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 10px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(164, 14, 205, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1.5px solid rgba(150, 11, 193, 0.5);
+    max-width: 700px;
+    width: 90%;
+    margin: 30px auto;
+    position: relative;
+    z-index: 2;
+    overflow-y: auto;
+    max-height: 90vh;
+    transition: all 0.3s ease-in-out;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(164, 14, 205, 0.6) transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo do scrollbar no Chrome */
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+    background: rgba(164, 14, 205, 0.6);
+    border-radius: 10px;
+}
+
+.container:hover {
+    box-shadow: 0 10px 40px rgba(164, 14, 205, 0.5), 0 6px 20px rgba(0, 0, 0, 0.25);
+    border-color: rgba(150, 11, 193, 0.8);
+}
+
+.logo-pequena {
+    position: fixed; /* Fixa a logo na tela */
+    top: 10px; /* Mantém um pequeno espaçamento do topo */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta para o centro exato */
+    width: 190px;
+    height: auto;
+    z-index: 9999; /* Garante que a logo fique acima de outros elementos */
+    filter: drop-shadow(0 0 6px rgba(164, 14, 205, 0.7));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
+
+
+.logo-pequena:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(200, 0, 255, 0.8));
+}
+
+
+h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-group label {
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.081);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.input-group input:focus {
+    border: 1px solid #a40ecd;
+    box-shadow: 0 0 12px rgba(164, 14, 205, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.input-group input:hover {
+    border-color: rgba(164, 14, 205, 0.3);
+}
+
+
+        .opportunities {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .opportunity {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            flex: 1;
+            min-width: 240px;
+            max-width: 300px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(230, 230, 250, 0.5));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+        .opportunity:hover {
+            transform: translateY(-5px);
+        }
+        .opportunity.lost {
+            background: linear-gradient(135deg, #ffebeb, #ffcccc);
+            pointer-events: none;
+        }
+        .opportunity.lost::after {
+            content: "→";
+            font-size: 40px;
+            color: #f44336;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+        }
+        .opportunity.won {
+            background: linear-gradient(135deg, #e0f7e9, #ccffcc);
+            pointer-events: none;
+        }
+        .opportunity.won::after {
+            content: "→";
+            font-size: 40px;
+            color: #4caf50;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+        }
+        .opportunity h2 {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .entry {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .entry strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .entry button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .entry button:hover {
+            background-color: #45a049;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .buttons button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 30px; /* deixa redondo e mais estiloso */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    margin: 0 10px;
+    text-indent: -9999px;
+    overflow: hidden;
+    padding: 0;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: none;
+}
+
+.buttons button:hover {
+    box-shadow: 0 0 12px rgba(52, 17, 72, 0.475), 
+                0 0 25px rgba(56, 11, 74, 0.863), 
+                0 0 40px rgba(67, 14, 82, 0.4);
+    transform: scale(1.05); /* dá aquele toquezinho de destaque */
+    border-radius: 30px;
+}
+
+
+/* Efeito hover opcional */
+.buttons button:hover {
+    transform: scale(1.05);
+}
+
+/* Botões com imagem de fundo */
+.buttons button.win {
+    background-image: url('win.png');
+}
+
+.buttons button.lose {
+    background-image: url('loss.png');
+}
+
+.buttons button.reset {
+    background-image: url('reset.png');
+}
+
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background-color: #000; /* Fundo preto */
+
+        }
+
+        #particle-canvas {
+    display: none;
+}
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            text-align: center;
+        }
+        .popup h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+        .popup button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ab31cd;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(120, 18, 172, 0.5);
+            background: linear-gradient(45deg, #832aa6, #8505a9);
+        }
+        .popup button:hover {
+            background: linear-gradient(45deg, #6c0996, #850db8);
+            box-shadow: 0 4px 25px rgba(147, 8, 185, 0.7);
+        }
+    </style>
+</head>
+<img src="logo.png" alt="Logo" class="logo-pequena">
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="container">
+        <div class="input-group">
+            <label for="banca">Valor da Banca (R$):</label>
+            <input type="number" id="banca" placeholder="Insira o valor da banca">
+        </div>
+        <div class="input-group">
+            <label for="payout">Payout (%):</label>
+            <input type="number" id="payout" placeholder="Insira o payout">
+        </div>
+        <div class="input-group">
+            <label for="divisoes">Divisões da Banca:</label>
+            <input type="number" id="divisoes" placeholder="Insira o número de divisões - Mínimo recomendado: 10" oninput="validarDivisoes()">
+        </div>
+        <button onclick="calcular()">Calcular</button>
+        <div class="opportunities" id="opportunities"></div>
+        <div class="buttons">
+            <button class="win" onclick="ganhei()">GANHEI</button>
+            <button class="lose" onclick="perdi()">PERDI</button>
+            <button class="reset" onclick="zerar()">ZERAR</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        function validarDivisoes() {
+            const divisoesInput = document.getElementById('divisoes');
+            if (divisoesInput.value > 100) {
+                divisoesInput.value = '';
+                showPopup('O número máximo de divisões é 100');
+            }
+        }
+
+        let bancaInicial = 0;
+        let bancaAtual = 0;
+        let divisao = 0;
+        let payout = 0;
+        let oportunidades = [];
+        let currentOpportunity = 0;
+
+        function calcular() {
+            bancaInicial = parseFloat(document.getElementById('banca').value);
+            payout = parseFloat(document.getElementById('payout').value) / 100;
+            divisao = parseInt(document.getElementById('divisoes').value);
+            bancaAtual = bancaInicial;
+
+            oportunidades = [];
+            for (let i = 0; i < divisao; i++) {
+                let entradas = [];
+                let valor = bancaInicial / divisao;
+                for (let j = 0; j < 4; j++) {
+                    let lucro = valor * payout;
+                    entradas.push({
+                        valor: valor.toFixed(2),
+                        lucro: lucro.toFixed(2),
+                        valorTotal: (valor + lucro).toFixed(2)
+                    });
+                    valor += lucro;
+                }
+                oportunidades.push(entradas);
+            }
+            renderOportunidades();
+        }
+
+        function renderOportunidades() {
+            const container = document.getElementById('opportunities');
+            container.innerHTML = '';
+            oportunidades.forEach((oportunidade, index) => {
+                const oppDiv = document.createElement('div');
+                oppDiv.classList.add('opportunity');
+                oppDiv.id = `opportunity-${index}`;
+                oppDiv.innerHTML = `<h2>Oportunidade ${index + 1}</h2>`;
+                oportunidade.forEach((entrada, idx) => {
+                    const entryDiv = document.createElement('div');
+                    entryDiv.classList.add('entry');
+                    entryDiv.innerHTML = `
+                        <div>
+                            <strong>Entrada ${String.fromCharCode(65 + idx)}:</strong>
+                            R$${entrada.valor} (Lucro: R$${entrada.lucro})
+                        </div>
+                        <button onclick="copiarValor('${entrada.valor}')">Copiar</button>`;
+                    if (idx === 3) {
+                        entryDiv.innerHTML += `<div><strong>Total:</strong> R$${entrada.valorTotal}</div>`;
+                    }
+                    oppDiv.appendChild(entryDiv);
+                });
+                container.appendChild(oppDiv);
+            });
+        }
+
+        function copiarValor(valor) {
+            navigator.clipboard.writeText(valor).then(() => {
+                showPopup(`Valor R$${valor} copiado!`);
+            });
+        }
+
+        function showPopup(message) {
+            const popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.innerHTML = `<h2>${message}</h2><button onclick="closePopup(this)">OK</button>`;
+            document.body.appendChild(popup);
+        }
+
+        function closePopup(button) {
+            const popup = button.parentElement;
+            popup.remove();
+        }
+
+        function ganhei() {
+            if (currentOpportunity < oportunidades.length) {
+                const oppDiv = document.getElementById(`opportunity-${currentOpportunity}`);
+                oppDiv.classList.add('won');
+                currentOpportunity++;
+                showPopup('Próximo quadrante');
+            } else {
+                showPopup('Todas as oportunidades foram usadas.');
+            }
+        }
+
+        function perdi() {
+            if (currentOpportunity < oportunidades.length) {
+                const oppDiv = document.getElementById(`opportunity-${currentOpportunity}`);
+                oppDiv.classList.add('lost');
+                currentOpportunity++;
+                showPopup('Próximo quadrante');
+            } else {
+                showPopup('Todas as oportunidades foram usadas.');
+            }
+        }
+
+        function zerar() {
+            document.getElementById('banca').value = '';
+            document.getElementById('payout').value = '';
+            document.getElementById('divisoes').value = '';
+            document.getElementById('opportunities').innerHTML = '';
+            oportunidades = [];
+            currentOpportunity = 0;
+        }
+
+        // Função para criar o efeito de partículas interligadas
+        function initParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const particleCount = 100;
+            const maxDistance = 100;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function createParticles() {
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: random(0, canvas.width),
+                        y: random(0, canvas.height),
+                        size: random(1, 3),
+                        speedX: random(-0.5, 0.5),
+                        speedY: random(-0.5, 0.5)
+                    });
+                }
+            }
+
+            function moveParticles() {
+                particles.forEach(particle => {
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+
+                    if (particle.x < 0 || particle.x > canvas.width) {
+                        particle.speedX *= -1;
+                    }
+
+                    if (particle.y < 0 || particle.y > canvas.height) {
+                        particle.speedY *= -1;
+                    }
+                });
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Partículas verdes
+                particles.forEach(particle => {
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fill();
+                });
+            }
+
+            function connectParticles() {
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a + 1; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < maxDistance) {
+                            ctx.strokeStyle = 'rgba(0, 255, 0, 0.1)'; // Linhas verdes
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+
+            
+
+            function animateParticles() {
+                moveParticles();
+                drawParticles();
+                connectParticles();
+                particles.forEach(particle => {
+                    particle.size = (Math.sin(Date.now() / 500) + 1) * 1.5; // Piscar das partículas
+                });
+                requestAnimationFrame(animateParticles);
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                particles.forEach(particle => {
+                    const dx = e.clientX - particle.x;
+                    const dy = e.clientY - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        const angle = Math.atan2(dy, dx);
+                        particle.speedX = Math.cos(angle);
+                        particle.speedY = Math.sin(angle);
+                    }
+                });
+            });
+
+            createParticles();
+            animateParticles();
+        }
+
+        window.onload = initParticles;
+    </script>
+
+
+
+
+</body></html>
