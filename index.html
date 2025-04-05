@@ -9,16 +9,16 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: url('fundo.png') no-repeat center center fixed; /* Substitua 'sua-imagem.jpg' */
-            background-size: cover;
-        }
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent; /* Remove o fundo */
+     }
+
 
         button {
             background: linear-gradient(45deg, #4f1483, #9d4edd);
@@ -46,17 +46,16 @@
 
 
         .container {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(164, 14, 205, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
-    border: 1.5px solid rgba(150, 11, 193, 0.5);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border: none;
     max-width: 700px;
     width: 95%;
     position: relative;
     z-index: 2;
-    padding-top: 100px; /* ajuste conforme o tamanho da sua logo */
+    padding-top: 100px;
     overflow-y: auto;
     max-height: 90vh;
     transition: all 0.3s ease-in-out;
@@ -67,7 +66,6 @@
     flex-direction: column;
     align-items: center;
 }
-
 /* Estilo do scrollbar no Chrome */
 .container::-webkit-scrollbar {
     width: 8px;
@@ -77,13 +75,13 @@
     border-radius: 10px;
 }
 
+
+
+/* Opcional: remover efeitos de hover no container */
 .container:hover {
-    box-shadow: 0 10px 40px rgba(164, 14, 205, 0.5), 0 6px 20px rgba(0, 0, 0, 0.25);
-    border-color: rgba(150, 11, 193, 0.8);
+    box-shadow: none;
+    border-color: transparent;
 }
-
-
-
 
 
 
