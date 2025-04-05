@@ -33,6 +33,8 @@
             cursor: pointer;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            margin-left: 80px; /* ajuste o valor conforme necessário */
+
         }
 
         button:hover {
@@ -49,8 +51,6 @@
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    box-shadow: none;
-    border: none;
     max-width: 700px;
     width: 95%;
     position: relative;
@@ -65,7 +65,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border: 2px solid #a40ecd;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(164, 14, 205, 0.5);
+    animation: glowing-border 2s infinite ease-in-out;
 }
+
+/* Animação para o brilho roxo */
+@keyframes glowing-border {
+    0% {
+        box-shadow: 0 0 10px rgba(164, 14, 205, 0.4), 
+                    0 0 20px rgba(164, 14, 205, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(164, 14, 205, 0.7), 
+                    0 0 35px rgba(164, 14, 205, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(164, 14, 205, 0.4), 
+                    0 0 20px rgba(164, 14, 205, 0.3);
+    }
+}
+
 /* Estilo do scrollbar no Chrome */
 .container::-webkit-scrollbar {
     width: 8px;
@@ -219,6 +241,8 @@ h1 {
         .buttons {
             text-align: center;
             margin-top: 20px;
+            margin-left: 20px; /* ajuste o valor conforme necessário */
+
         }
         .buttons button {
     width: 60px;
@@ -314,12 +338,26 @@ h1 {
         }
 
         .logo-container {
-    width: 90px; /* ajuste o tamanho como quiser */
-    margin-top: -70px; /* sobe a logo dentro do container */
+    width: 90px;
+    margin-top: -70px;
     margin-bottom: 20px;
-    border-radius: 120%; /* opcional: deixa redonda se a imagem for quadrada */
+    border-radius: 120%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    /* Efeito de rotação */
+    animation: girar 16s linear infinite;
 }
+
+/* Keyframes da animação */
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
     </style>
 </head>
@@ -327,7 +365,7 @@ h1 {
 <body>
     <canvas id="particle-canvas"></canvas>
     <div class="container">
-        <img src="logo.gif" alt="Logo" class="logo-container">
+        <img src="logo.png" alt="Logo" class="logo-container">
 
         <div class="input-group">
             <div class="input-group">
