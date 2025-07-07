@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
         body {
+    background-image: url('fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     overflow: hidden;
@@ -16,7 +19,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: transparent; /* Remove o fundo */
      }
 
 
@@ -361,35 +363,32 @@ h1 {
 
     </style>
 </head>
-
 <body>
-    <canvas id="particle-canvas"></canvas>
-    <div class="container">
-        <img src="logo.png" alt="Logo" class="logo-container">
-
-        <div class="input-group">
-            <div class="input-group">
-            <label for="banca">Valor da Banca (R$):</label>
-            <input type="number" id="banca" placeholder="Insira o valor da banca">
-        </div>
-        <div class="input-group">
-            <label for="payout">Payout (%):</label>
-            <input type="number" id="payout" placeholder="Insira o payout">
-        </div>
-        <div class="input-group">
-            <label for="divisoes">Divisões da Banca:</label>
-            <input type="number" id="divisoes" placeholder="Insira o número de divisões - Mínimo recomendado: 10" oninput="validarDivisoes()">
-        </div>
-        <button onclick="calcular()">Calcular</button>
-        <div class="opportunities" id="opportunities"></div>
-        <div class="buttons">
-            <button class="win" onclick="ganhei()">GANHEI</button>
-            <button class="lose" onclick="perdi()">PERDI</button>
-            <button class="reset" onclick="zerar()">ZERAR</button>
-        </div>
-    </div>
-
-    <script>
+<canvas id="particle-canvas"></canvas>
+<div class="container">
+<img alt="Logo" class="logo-container" src="logo.png"/>
+<div class="input-group">
+<div class="input-group">
+<label for="banca">Valor da Banca (R$):</label>
+<input id="banca" placeholder="Insira o valor da banca" type="number"/>
+</div>
+<div class="input-group">
+<label for="payout">Payout (%):</label>
+<input id="payout" placeholder="Insira o payout" type="number"/>
+</div>
+<div class="input-group">
+<label for="divisoes">Divisões da Banca:</label>
+<input id="divisoes" oninput="validarDivisoes()" placeholder="Insira o número de divisões - Mínimo recomendado: 10" type="number"/>
+</div>
+<button onclick="calcular()">Calcular</button>
+<div class="opportunities" id="opportunities"></div>
+<div class="buttons">
+<button class="win" onclick="ganhei()">GANHEI</button>
+<button class="lose" onclick="perdi()">PERDI</button>
+<button class="reset" onclick="zerar()">ZERAR</button>
+</div>
+</div>
+<script>
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         function validarDivisoes() {
@@ -610,8 +609,4 @@ h1 {
 
         window.onload = initParticles;
     </script>
-
-
-
-
-</body></html>
+</div></body></html>
